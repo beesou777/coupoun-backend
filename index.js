@@ -13,9 +13,13 @@ app.use(express.json())
 // Set routes
 app.use("/api/admin",auth)
 app.use("/",coupon)
+
+app.get("/", (req, res) => {
+  res.send("Api is running on port" + PORT)
+})
 const start = async () => {
   try {
-    await connectdb(process.env.MONGODB_URL);
+    await connectdb(process.env.MONGODB_URI);
     app.listen(PORT, () => {
       console.log(`Listening on port ${PORT}`);
     });
